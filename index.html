@@ -4,124 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>إلى رُبى ❤️</title>
-
 <style>
 body{
 margin:0;
 font-family:Tahoma;
-background:linear-gradient(180deg,#050814,#0b1a3a,#2a1b5a);
-overflow:hidden;
-color:white;
+background:linear-gradient(180deg,#081120,#14213d,#2d1b69);
+overflow-x:hidden;
 }
-
-/* دخول سينمائي */
 #welcome{
 position:fixed;
 inset:0;
 display:flex;
 justify-content:center;
 align-items:center;
-background:radial-gradient(circle,#0b1a3a,#050814);
+background:linear-gradient(180deg,#081120,#14213d,#2d1b69);
 z-index:9999;
-animation:fadeIn 2s ease;
 }
-
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
-
 #openBtn{
-padding:22px 50px;
-font-size:26px;
+padding:22px 45px;
+font-size:28px;
 border:none;
 border-radius:999px;
 cursor:pointer;
-background:rgba(255,255,255,.08);
+background:rgba(255,255,255,.1);
 color:white;
-backdrop-filter:blur(15px);
-box-shadow:0 0 50px rgba(255,105,180,.4);
-transition:0.3s;
+backdrop-filter:blur(20px);
+box-shadow:0 0 40px rgba(255,105,180,.4);
 }
-
-#openBtn:hover{
-transform:scale(1.05);
-box-shadow:0 0 70px rgba(255,105,180,.7);
-}
-
-/* الرسالة */
 .card{
 display:none;
-max-width:850px;
-margin:60px auto;
-padding:40px;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(20px);
+max-width:900px;
+margin:40px auto;
+padding:35px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
 border-radius:30px;
-line-height:2.2;
-text-align:center;
-animation:showCard 2s ease forwards;
+color:white;
+line-height:2;
 }
-
-@keyframes showCard{
-from{transform:translateY(40px);opacity:0}
-to{transform:translateY(0);opacity:1}
-}
-
-h1{
-margin-bottom:20px;
-}
-
-/* كتابة */
 #text{
-font-size:22px;
 white-space:pre-wrap;
-min-height:120px;
+font-size:20px;
 }
-
 .cursor{
-animation:blink .7s infinite;
+animation:blink .8s infinite;
 }
-
-@keyframes blink{50%{opacity:0}}
-
-/* قلوب */
-.heart{
-position:fixed;
-color:pink;
-font-size:22px;
-animation:floatUp 5s linear forwards;
-pointer-events:none;
-opacity:0.9;
-}
-
-@keyframes floatUp{
-0%{transform:translateY(0) scale(1);opacity:1}
-100%{transform:translateY(-900px) scale(1.6);opacity:0}
+@keyframes blink{
+50%{opacity:0;}
 }
 </style>
 </head>
-
 <body>
-
-<!-- شاشة الدخول -->
 <div id="welcome">
 <button id="openBtn">💌 افتحي الرسالة</button>
 </div>
-
-<!-- الرسالة -->
 <div class="card" id="card">
-<h1>إلى رُبى ❤️</h1>
+<h1 style="text-align:center;">إلى رُبى ❤️</h1>
 <div id="text"></div>
 </div>
-
-<!-- موسيقى -->
 <audio id="music" loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
-
 <script>
-const message = ` 
+const message = `
 
 هالرسالة رح تكون أصعب رسالة بتقريها مني.
 
@@ -138,7 +83,7 @@ const message = `
 اليوم أنا مسافر،
 واليوم فعليًا رح تبعد المسافة بيني وبينك أكتر من أي وقت قبل.
 
-أنا ما عم فل من شعوري فيكي، بس عم فل من المكان.
+أنا ما عم بفل من شعوري فيكي، بس عم فل من المكان.
 
 كل شي حواليي رح يتغيّر،
 الناس، الطرق، الأيام…
@@ -239,45 +184,24 @@ const message = `
 ولو كنت بعيد انتِ رح تضلي اقرب من قلبي الي 
 انتبهِ عحالك و عصحتك يا قلبي وانشالله بترجع بتجمعنا الحياة مرة تانية وبحبك كتيرررر❤️❤️
 سامحيني💔`;
-
-let i = 0;
-
+let i=0;
 function typeWriter(){
-if(i < message.length){
-document.getElementById("text").innerHTML =
-message.substring(0,i+1) + '<span class="cursor">|</span>';
+if(i<message.length){
+document.getElementById("text").innerHTML=
+message.substring(0,i+1)+
+'<span class="cursor">|</span>';
 i++;
-setTimeout(typeWriter,30);
+setTimeout(typeWriter,25);
 }
 }
-
-/* قلوب متحركة */
-function startHearts(){
-setInterval(()=>{
-const heart = document.createElement("div");
-heart.className = "heart";
-heart.innerHTML = "❤️";
-heart.style.left = Math.random()*100 + "vw";
-heart.style.bottom = "-20px";
-heart.style.fontSize = (18 + Math.random()*20) + "px";
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),5000);
-},250);
-}
-
-document.getElementById("openBtn").onclick = async ()=>{
+document.getElementById("openBtn").onclick=async()=>{
 try{
 await document.getElementById("music").play();
 }catch(e){}
-
 document.getElementById("welcome").style.display="none";
 document.getElementById("card").style.display="block";
-
 typeWriter();
-startHearts();
 };
 </script>
-
 </body>
 </html>
